@@ -12,7 +12,24 @@
 		698D5C1920840DEF001024D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 698D5C1720840DEF001024D9 /* Main.storyboard */; };
 		698D5C1B20840DEF001024D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 698D5C1A20840DEF001024D9 /* Assets.xcassets */; };
 		698D5C1E20840DEF001024D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 698D5C1C20840DEF001024D9 /* LaunchScreen.storyboard */; };
+		698D5C4420841336001024D9 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 698D5C4320841336001024D9 /* Alamofire.framework */; };
+		698D5C4520841336001024D9 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 698D5C4320841336001024D9 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		698D5C4A2084143D001024D9 /* MessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698D5C492084143D001024D9 /* MessageTableViewController.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		698D5C4620841336001024D9 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				698D5C4520841336001024D9 /* Alamofire.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		698D5C1020840DEF001024D9 /* ChitChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChitChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -22,6 +39,8 @@
 		698D5C1A20840DEF001024D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		698D5C1D20840DEF001024D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		698D5C1F20840DEF001024D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		698D5C4320841336001024D9 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		698D5C492084143D001024D9 /* MessageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				698D5C4420841336001024D9 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +58,7 @@
 		698D5C0720840DEF001024D9 = {
 			isa = PBXGroup;
 			children = (
+				698D5C4320841336001024D9 /* Alamofire.framework */,
 				698D5C1220840DEF001024D9 /* ChitChat */,
 				698D5C1120840DEF001024D9 /* Products */,
 			);
@@ -54,6 +75,7 @@
 		698D5C1220840DEF001024D9 /* ChitChat */ = {
 			isa = PBXGroup;
 			children = (
+				698D5C492084143D001024D9 /* MessageTableViewController.swift */,
 				698D5C1320840DEF001024D9 /* AppDelegate.swift */,
 				698D5C1520840DEF001024D9 /* ViewController.swift */,
 				698D5C1720840DEF001024D9 /* Main.storyboard */,
@@ -74,6 +96,7 @@
 				698D5C0C20840DEF001024D9 /* Sources */,
 				698D5C0D20840DEF001024D9 /* Frameworks */,
 				698D5C0E20840DEF001024D9 /* Resources */,
+				698D5C4620841336001024D9 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -137,6 +160,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				698D5C1620840DEF001024D9 /* ViewController.swift in Sources */,
+				698D5C4A2084143D001024D9 /* MessageTableViewController.swift in Sources */,
 				698D5C1420840DEF001024D9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
