@@ -43,22 +43,21 @@ class MessageCell: UITableViewCell {
             imageDisplay.isHidden = true
         }
         
-        print(message.loc)
-//        if let location = message.loc {
-//            print("~~~~~~~~~~~~location: ", location)
-//            let latitude: CLLocationDegrees = location.latitude
-//            let longitude: CLLocationDegrees = location.longitude
-//            let initialLocation = CLLocation(latitude: latitude, longitude: longitude)
-//            let regionRadius: CLLocationDistance = 400
-//            let coordinateRegion = MKCoordinateRegionMakeWithDistance(initialLocation.coordinate, regionRadius, regionRadius)
-//            mapDisplay.setRegion(coordinateRegion, animated: true)
-//            // display annotation pin
-//            let annotation: MKAnnotation = PointerCoordinate(location: location)
-//            mapDisplay.addAnnotation(annotation)
-//            mapDisplay.isHidden = false
-//        } else {
-//            mapDisplay.isHidden = true
-//        }
+        if let location = message.loc {
+            let regionRadius: CLLocationDistance = 0.01
+            print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", location)
+            if CLLocationCoordinate2DIsValid(location) {
+                let coordinateRegion = MKCoordinateRegionMakeWithDistance(location, regionRadius, regionRadius)
+                mapDisplay.isHidden = false
+                mapDisplay.setRegion(coordinateRegion, animated: true)
+                mapDisplay.isZoomEnabled = true
+                // display annotation pin
+                let annotation: MKAnnotation = PointerCoordinate(location: location)
+                mapDisplay.addAnnotation(annotation)
+            } else {
+                mapDisplay.isHidden = true
+            }
+        }
         
         timestampDisplay.text = message.date
         downvoteDisplay.text = "-" + String(message.dislikes)

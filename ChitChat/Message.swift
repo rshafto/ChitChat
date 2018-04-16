@@ -40,13 +40,10 @@ class Message {
         client = (json["client"] as? String)!
         date = (json["date"] as? String)!
         id = (json["_id"] as? String)!
-//        print(json["loc"])
         if let coordinatesJSON = json["loc"] as? [Any] {
             if let test = Double(String(describing: coordinatesJSON[0])) {
                 let latitude: Double = Double(String(describing: coordinatesJSON[0]))!
                 let longitude: Double = Double(String(describing: coordinatesJSON[1]))!
-                print("LATITUDE: ", latitude)
-                print("LONGITUDE: ", longitude)
                 loc = CLLocationCoordinate2D.init(latitude: latitude, longitude: longitude)
             }
         }
