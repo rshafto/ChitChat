@@ -26,21 +26,20 @@ class MessageTableViewController: UITableViewController {
                 }
                 print(self.messages[0].client)
             }
+            self.tableView.reloadData()
+            print("reloaded data...")
         }
-        self.tableView.reloadData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         getData()
-        print(messages.count)
+        tableView.rowHeight = 140
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,14 +56,12 @@ class MessageTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        print (self.messages.count)
         return self.messages.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "messageCell", for: indexPath)
-
-        // Configure the cell...
+        let cell = tableView.dequeueReusableCell(withIdentifier: "messageCell", for: indexPath) as! MessageCell
+        cell.setMessage(message: messages[indexPath.row])
 
         return cell
     }
