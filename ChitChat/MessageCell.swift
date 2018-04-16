@@ -7,9 +7,16 @@
 //
 
 import UIKit
+import MapKit
 
 class MessageCell: UITableViewCell {
-
+    @IBOutlet weak var imageDisplay: UIImageView!
+    @IBOutlet weak var mapDisplay: MKMapView!
+    @IBOutlet weak var messageTextDisplay: UITextView!
+    @IBOutlet weak var upvoteDisplay: UILabel!
+    @IBOutlet weak var downvoteDisplay: UILabel!
+    @IBOutlet weak var timestampDisplay: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
