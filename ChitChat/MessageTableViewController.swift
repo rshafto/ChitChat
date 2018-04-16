@@ -10,21 +10,26 @@ import UIKit
 import Alamofire
 
 class MessageTableViewController: UITableViewController {
-
+    var messages: [Message] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         Alamofire.request("https://www.stepoutnyc.com/chitchat", method: .get, parameters: ["key" : "735e6cff-5205-49b7-be80-7ec57c083aac", "client" : "robin.shafto@mymail.champlain.edu"]).responseJSON { response in
-            print("Request: \(String(describing: response.request))")   // original url request
-            print("Response: \(String(describing: response.response))") // http url response
-            print("Result: \(response.result)")                         // response serialization result
+//            print("Request: \(String(describing: response.request))")   // original url request
+//            print("Response: \(String(describing: response.response))") // http url response
+//            print("Result: \(response.result)")                         // response serialization result
+//            print("name? ", response.result )
             
             if let json = response.result.value {
+                //print("JSON: \(json)") // serialized json response
+                
+//                let son = try? JSONSerialization.jsonObject(with: json, options: [])
                 print("JSON: \(json)") // serialized json response
             }
             
             if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-                print("Data: \(utf8Text)") // original server data as UTF8 string
+//                print("Data: \(utf8Text)") // original server data as UTF8 string
             }
         }
 
