@@ -37,10 +37,9 @@ class MessageCell: UITableViewCell {
         self.message = message
         messageTextDisplay.text = message.message
         if let image = message.image {
+//            message.testMessage()
             imageDisplay.image = image
             imageDisplay.isHidden = false
-            message.upvote()
-            message.upvote()
         } else {
             imageDisplay.isHidden = true
         }
@@ -52,7 +51,6 @@ class MessageCell: UITableViewCell {
                 mapDisplay.isHidden = false
                 mapDisplay.setRegion(coordinateRegion, animated: true)
                 mapDisplay.isZoomEnabled = true
-                // display annotation pin
                 let annotation: MKAnnotation = PointerCoordinate(location: location)
                 mapDisplay.addAnnotation(annotation)
             } else {
@@ -61,7 +59,7 @@ class MessageCell: UITableViewCell {
         }
         
         timestampDisplay.text = message.date
-        downvoteDisplay.text = "-" + String(message.dislikes)
-        upvoteDisplay.text = "+" + String(message.likes)
+        downvoteDisplay.text = "👎" + String(message.dislikes)
+        upvoteDisplay.text = "👍" + String(message.likes)
     }
 }

@@ -24,11 +24,45 @@ class MessageTableViewController: UITableViewController {
                     self.message = Message(json: messageText)
                     self.messages.append(self.message)
                 }
-                print(self.messages[0].client)
             }
             self.tableView.reloadData()
             print("reloaded data...")
         }
+    }
+    
+//    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+//
+//        let more = UITableViewRowAction(style: .normal, title: "More") { action, index in
+//            print("more button tapped")
+//        }
+//        more.backgroundColor = UIColor.lightGray
+//
+//        let share = UITableViewRowAction(style: .normal, title: "Share") { action, index in
+//            print("share button tapped")
+//        }
+//        share.backgroundColor = UIColor.blue
+//
+//        return [share, more]
+//    }
+    
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
+    {
+        let upvote = UIContextualAction(style: .destructive, title: "Like") { (action, view, handler) in
+            self.messages[indexPath.row].upvote()
+        }
+        upvote.backgroundColor = .green
+        let configuration = UISwipeActionsConfiguration(actions: [upvote])
+        return configuration
+    }
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
+    {
+        let downvote = UIContextualAction(style: .destructive, title: "Dislike") { (action, view, handler) in
+            self.messages[indexPath.row].downvote()
+        }
+        downvote.backgroundColor = .red
+        let configuration = UISwipeActionsConfiguration(actions: [downvote])
+        return configuration
     }
     
     override func viewDidLoad() {
@@ -46,8 +80,6 @@ class MessageTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections

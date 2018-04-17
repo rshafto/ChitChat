@@ -45,7 +45,7 @@ class Message {
         date = (json["date"] as? String)!
         id = (json["_id"] as? String)!
         if let coordinatesJSON = json["loc"] as? [Any] {
-            if let test = Double(String(describing: coordinatesJSON[0])) {
+            if Double(String(describing: coordinatesJSON[0])) != nil {
                 let latitude: Double = Double(String(describing: coordinatesJSON[0]))!
                 let longitude: Double = Double(String(describing: coordinatesJSON[1]))!
                 loc = CLLocationCoordinate2D.init(latitude: latitude, longitude: longitude)
@@ -71,15 +71,20 @@ class Message {
     }
     
     func upvote() {
-        var url: String = "https://www.stepoutnyc.com/chitchat/like/" + id
+        let url: String = "https://www.stepoutnyc.com/chitchat/like/" + id
         print("UPVOTED: ", message)
         Alamofire.request(url, method: .get , parameters: ["key" : key, "client" : client])
     }
     
     func downvote() {
-        var url: String = "https://www.stepoutnyc.com/chitchat/dislike/" + id
-        Alamofire.request(url, method: .get, parameters: ["key" : key, "client" : client]).responseJSON {_ in
-        }
+        let url: String = "https://www.stepoutnyc.com/chitchat/dislike/" + id
+        print("DOWNVOTED: ", message)
+        Alamofire.request(url, method: .get , parameters: ["key" : key, "client" : client])
+    }
+    
+    func testMessage() {
+        let url: String = "https://www.stepoutnyc.com/chitchat?key=735e6cff-5205-49b7-be80-7ec57c083aac&client=robin.shafto@mymail.champlain.edu&message=Oh hey, Robin! It's Robin!"
+        Alamofire.request(url, method: .post , parameters: ["key" : key, "client" : client, "message" : "Oh hey, Robin! It's Robin!"])
     }
 }
 
