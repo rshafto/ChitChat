@@ -14,7 +14,7 @@ class MessageTableViewController: UITableViewController {
     var message: Message!
     
     func getData() {
-        Alamofire.request("https://www.stepoutnyc.com/chitchat", method: .get, parameters: ["key" : "735e6cff-5205-49b7-be80-7ec57c083aac", "client" : "robin.shafto@mymail.champlain.edu"]).responseJSON { response in
+        Alamofire.request("https://www.stepoutnyc.com/chitchat", method: .get, parameters: ["key" : key, "client" : client]).responseJSON { response in
             if let json = response.result.value {
                 let jsonDict = json as! NSDictionary
                 let jsonMessages = jsonDict["messages"] as! NSArray

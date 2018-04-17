@@ -9,6 +9,10 @@
 import Foundation
 import MapKit
 import CoreLocation
+import Alamofire
+
+let key = "735e6cff-5205-49b7-be80-7ec57c083aac"
+let client = "robin.shafto@mymail.champlain.edu"
 
 extension UIImage {
     convenience init?(url: URL?) {
@@ -63,6 +67,18 @@ class Message {
                     image = UIImage(url: address!)
                 }
             }
+        }
+    }
+    
+    func upvote() {
+        var url: String = "https://www.stepoutnyc.com/chitchat/like/" + id
+        Alamofire.request(url, method: .get, parameters: ["key" : key, "client" : client]).responseJSON {_ in
+        }
+    }
+    
+    func downvote() {
+        var url: String = "https://www.stepoutnyc.com/chitchat/dislike/" + id
+        Alamofire.request(url, method: .get, parameters: ["key" : key, "client" : client]).responseJSON {_ in
         }
     }
 }

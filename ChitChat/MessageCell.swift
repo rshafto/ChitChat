@@ -39,13 +39,14 @@ class MessageCell: UITableViewCell {
         if let image = message.image {
             imageDisplay.image = image
             imageDisplay.isHidden = false
+            message.upvote()
+            message.upvote()
         } else {
             imageDisplay.isHidden = true
         }
         
         if let location = message.loc {
             let regionRadius: CLLocationDistance = 0.01
-            print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", location)
             if CLLocationCoordinate2DIsValid(location) {
                 let coordinateRegion = MKCoordinateRegionMakeWithDistance(location, regionRadius, regionRadius)
                 mapDisplay.isHidden = false
