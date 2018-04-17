@@ -72,8 +72,8 @@ class Message {
     
     func upvote() {
         var url: String = "https://www.stepoutnyc.com/chitchat/like/" + id
-        Alamofire.request(url, method: .get, parameters: ["key" : key, "client" : client]).responseJSON {_ in
-        }
+        print("UPVOTED: ", message)
+        Alamofire.request(url, method: .get , parameters: ["key" : key, "client" : client])
     }
     
     func downvote() {
