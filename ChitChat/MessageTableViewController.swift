@@ -12,6 +12,21 @@ import Alamofire
 class MessageTableViewController: UITableViewController {
     var messages: [Message] = []
     var message: Message!
+    @IBAction func AddMessage(_ sender: UIBarButtonItem) {
+        let alertController = UIAlertController(title: "Send new message", message: "Enter your message", preferredStyle: .alert)
+        var newMessage: String = ""
+        let OKAction = UIAlertAction(title: "Enter", style: .default) { (action:UIAlertAction!) in
+            newMessage = (alertController.textFields?[0].text) ?? "AHHHHHH"
+            print("Sending message:", newMessage)
+            self.messages[0].testMessage()
+        }
+        
+        alertController.addAction(OKAction)
+        alertController.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = "message"
+        }
+        self.present(alertController, animated: false, completion: nil)
+    }
     
     func getData() {
         Alamofire.request("https://www.stepoutnyc.com/chitchat", method: .get, parameters: ["key" : key, "client" : client]).responseJSON { response in
@@ -29,21 +44,6 @@ class MessageTableViewController: UITableViewController {
             print("reloaded data...")
         }
     }
-    
-//    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-//
-//        let more = UITableViewRowAction(style: .normal, title: "More") { action, index in
-//            print("more button tapped")
-//        }
-//        more.backgroundColor = UIColor.lightGray
-//
-//        let share = UITableViewRowAction(style: .normal, title: "Share") { action, index in
-//            print("share button tapped")
-//        }
-//        share.backgroundColor = UIColor.blue
-//
-//        return [share, more]
-//    }
     
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
@@ -70,6 +70,14 @@ class MessageTableViewController: UITableViewController {
         
         getData()
         tableView.rowHeight = 140
+        
+        let tap = UITapGestureRecognizer(target: self, action: "close:")
+        self.tableView.addGestureRecognizer(tap)
+    }
+    
+    func close(tap: UITapGestureRecognizer) {
+        print ("TAPPED!")
+        self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
