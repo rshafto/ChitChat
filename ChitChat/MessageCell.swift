@@ -56,6 +56,8 @@ class MessageCell: UITableViewCell {
             } else {
                 mapDisplay.isHidden = true
             }
+        } else {
+            mapDisplay.isHidden = true
         }
         
         timestampDisplay.text = message.date

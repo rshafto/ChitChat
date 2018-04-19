@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -66,7 +67,7 @@
                                                         <constraint firstAttribute="width" constant="89" id="gF5-1E-PlQ"/>
                                                     </constraints>
                                                 </mapView>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vqf-fA-79A">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vqf-fA-79A">
                                                     <rect key="frame" x="178" y="0.0" width="163" height="89"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
@@ -133,10 +134,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Messages" id="P1w-LW-7h2">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="mxS-Mg-r4u">
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="mxS-Mg-r4u">
                             <connections>
                                 <action selector="AddMessage:" destination="B1D-XF-Unu" id="inm-cw-k7X"/>
-                                <segue destination="WD8-Y3-T9T" kind="presentation" id="Hdi-Zt-boQ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -145,27 +145,75 @@
             </objects>
             <point key="canvasLocation" x="-841" y="97"/>
         </scene>
-        <!--View Controller-->
+        <!--New Message-->
         <scene sceneID="Ebv-lH-0PA">
             <objects>
-                <viewController id="WD8-Y3-T9T" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="lXi-Y1-QEg">
+                <viewController title="New Message" modalPresentationStyle="overFullScreen" id="WD8-Y3-T9T" customClass="ComposeMessageViewController" customModule="ChitChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="lXi-Y1-QEg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A6P-kb-jTL">
-                                <rect key="frame" x="67" y="269" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="mMl-gY-Uv3">
+                                <rect key="frame" x="51" y="177" width="273" height="333.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8SD-XV-vN3">
+                                        <rect key="frame" x="0.0" y="0.0" width="273" height="222.5"/>
+                                        <subviews>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter message" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="AJW-mC-os0">
+                                                <rect key="frame" x="0.0" y="0.0" width="218.5" height="222.5"/>
+                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <button opaque="NO" contentMode="top" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dmn-o6-PjK">
+                                                <rect key="frame" x="218.5" y="94.5" width="54.5" height="33"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <state key="normal" image="LocationOff"/>
+                                                <connections>
+                                                    <action selector="IncludeLocationToggle:" destination="WD8-Y3-T9T" eventType="touchUpInside" id="RI6-Vb-P2K"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="AJW-mC-os0" firstAttribute="height" secondItem="8SD-XV-vN3" secondAttribute="height" id="9XO-Ls-gTB"/>
+                                            <constraint firstAttribute="width" constant="273" id="SHX-0G-zHd"/>
+                                            <constraint firstItem="AJW-mC-os0" firstAttribute="width" secondItem="8SD-XV-vN3" secondAttribute="width" multiplier="4:5" id="nuN-ts-SKY"/>
+                                        </constraints>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V8M-RS-3T4">
+                                        <rect key="frame" x="111.5" y="222.5" width="50" height="111"/>
+                                        <state key="normal" image="Send">
+                                            <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="Send:" destination="WD8-Y3-T9T" eventType="touchUpInside" id="VEf-wC-Hoa"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="8SD-XV-vN3" firstAttribute="height" secondItem="mMl-gY-Uv3" secondAttribute="height" multiplier="2:3" id="pjB-1s-aqi"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mMl-gY-Uv3" firstAttribute="centerY" secondItem="SaJ-u9-5x7" secondAttribute="centerY" id="65z-jp-9d9"/>
+                            <constraint firstItem="mMl-gY-Uv3" firstAttribute="centerX" secondItem="SaJ-u9-5x7" secondAttribute="centerX" id="xwr-IF-8C2"/>
+                            <constraint firstItem="mMl-gY-Uv3" firstAttribute="height" secondItem="lXi-Y1-QEg" secondAttribute="height" multiplier="1:2" id="zn0-Lz-agb"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="SaJ-u9-5x7"/>
                     </view>
+                    <connections>
+                        <outlet property="MessageText" destination="AJW-mC-os0" id="l0K-z3-yxL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Og-G7-m1A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-74" y="97"/>
+            <point key="canvasLocation" x="-74.400000000000006" y="96.7016491754123"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="LocationOff" width="33" height="33"/>
+        <image name="Send" width="50" height="50"/>
+    </resources>
 </document>

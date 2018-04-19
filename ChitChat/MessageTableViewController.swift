@@ -18,7 +18,7 @@ class MessageTableViewController: UITableViewController {
         let OKAction = UIAlertAction(title: "Enter", style: .default) { (action:UIAlertAction!) in
             newMessage = (alertController.textFields?[0].text) ?? "AHHHHHH"
             print("Sending message:", newMessage)
-            self.messages[0].testMessage()
+            sendMessage(message: newMessage, sendLocation: true)
         }
         
         alertController.addAction(OKAction)
@@ -38,6 +38,7 @@ class MessageTableViewController: UITableViewController {
                     let messageText = jsonMessage as! NSDictionary as! [String: Any]
                     self.message = Message(json: messageText)
                     self.messages.append(self.message)
+                    print (self.message.loc)
                 }
             }
             self.tableView.reloadData()
@@ -70,14 +71,6 @@ class MessageTableViewController: UITableViewController {
         
         getData()
         tableView.rowHeight = 140
-        
-        let tap = UITapGestureRecognizer(target: self, action: "close:")
-        self.tableView.addGestureRecognizer(tap)
-    }
-    
-    func close(tap: UITapGestureRecognizer) {
-        print ("TAPPED!")
-        self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {

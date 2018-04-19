@@ -81,12 +81,8 @@ class Message {
         print("DOWNVOTED: ", message)
         Alamofire.request(url, method: .get , parameters: ["key" : key, "client" : client])
     }
-    
-    func testMessage() {
-        let url: String = "https://www.stepoutnyc.com/chitchat?key=735e6cff-5205-49b7-be80-7ec57c083aac&client=robin.shafto@mymail.champlain.edu&message=Oh hey, Robin! It's Robin!"
-        Alamofire.request(url, method: .post , parameters: ["key" : key, "client" : client, "message" : "Oh hey, Robin! It's Robin!"])
-    }
 }
+
 
 
 
