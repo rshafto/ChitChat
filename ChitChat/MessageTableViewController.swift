@@ -15,11 +15,7 @@ class MessageTableViewController: UITableViewController {
     
     @objc func checkBoxAction(_ sender: UIButton!) {
         sender.alpha = 0.0
-        if sender.backgroundImage(for: UIControlState()) == #imageLiteral(resourceName: "LocationOn") {
-            sender.setBackgroundImage(#imageLiteral(resourceName: "LocationOff"), for: UIControlState())
-        } else {
-            sender.setBackgroundImage(#imageLiteral(resourceName: "LocationOn"), for: UIControlState())
-        }
+        sender.isSelected = !sender.isSelected
         sender.fadeIn(duration: 0.5)
     }
     
@@ -30,24 +26,22 @@ class MessageTableViewController: UITableViewController {
         let OKAction = UIAlertAction(title: "Enter", style: .default) { (action:UIAlertAction!) in
             newMessage = (alertController.textFields?[0].text)!
             print("Sending message:", newMessage)
-            sendMessage(message: newMessage, sendLocation: true)
-            //sendMessage(message: newMessage, sendLocation: imageButton.backgroundImage(for: .normal) == #imageLiteral(resourceName: "LocationOff"))
+            sendMessage(message: newMessage, sendLocation: imageButton.isSelected)
+            self.getData()
         }
         
-        imageButton.setBackgroundImage(#imageLiteral(resourceName: "LocationOn"), for: UIControlState())
+        imageButton.setBackgroundImage(#imageLiteral(resourceName: "LocationOn"), for: .selected)
+        imageButton.setBackgroundImage(#imageLiteral(resourceName: "LocationOff"), for: .normal)
         imageButton.addTarget(self, action: #selector(MessageTableViewController.checkBoxAction(_:)), for: .touchUpInside)
-        
-        
         
         alertController.addAction(OKAction)
         alertController.addTextField { (textField : UITextField!) -> Void in
             textField.placeholder = "message"
         }
         
-        let verticalConstraint = NSLayoutConstraint(item: imageButton, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: view, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0)
-        
         alertController.view.addSubview(imageButton)
-        alertController.view.addConstraints([verticalConstraint])
+//        let verticalConstraint = NSLayoutConstraint(item: imageButton, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: view, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0)
+//        alertController.view.addConstraints([verticalConstraint])
         self.present(alertController, animated: false, completion: nil)
     }
     

@@ -11,8 +11,8 @@ import Alamofire
 import CoreLocation
 
 func sendMessage(message: String, sendLocation: Bool) {
-    var lat: String = "1.2"
-    var lon: String = "3.4"
+    var lat: String = ""
+    var lon: String = ""
     
     if sendLocation {
         let locManager = CLLocationManager()
