@@ -22,6 +22,7 @@ class MessageTableViewController: UITableViewController {
     @IBAction func AddMessage(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: "Send new message", message: "Enter your message", preferredStyle: .alert)
         var newMessage: String = ""
+        let CancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let imageButton : UIButton = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
         let OKAction = UIAlertAction(title: "Enter", style: .default) { (action:UIAlertAction!) in
             newMessage = (alertController.textFields?[0].text)!
@@ -30,6 +31,7 @@ class MessageTableViewController: UITableViewController {
             self.getData()
         }
         
+        alertController.addAction(CancelAction)
         imageButton.setBackgroundImage(#imageLiteral(resourceName: "LocationOn"), for: .selected)
         imageButton.setBackgroundImage(#imageLiteral(resourceName: "LocationOff"), for: .normal)
         imageButton.addTarget(self, action: #selector(MessageTableViewController.checkBoxAction(_:)), for: .touchUpInside)
