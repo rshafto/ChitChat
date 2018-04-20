@@ -71,24 +71,28 @@ class Message {
     }
     
     func upvote() {
-        if var likes = UserDefaults.standard.array(forKey: "likes") as! [String]?, let dislikes = UserDefaults.standard.array(forKey: "dislikes") as! [String]? {
-            if !likes.contains(id) && !dislikes.contains(id) {
-                likes.append(id)
-                let url: String = "https://www.stepoutnyc.com/chitchat/like/" + id
-                print("UPVOTED: ", message)
-                Alamofire.request(url, method: .get , parameters: ["key" : key, "client" : client])
-            }
+        var likes = (UserDefaults.standard.array(forKey: "likes") ?? []) as! [String]
+        let dislikes = (UserDefaults.standard.array(forKey: "dislikes") ?? []) as! [String]
+        if !likes.contains(id) && !dislikes.contains(id) {
+            likes.append(id)
+            self.likes += 1
+            let url: String = "https://www.stepoutnyc.com/chitchat/like/" + id
+            print("UPVOTED: ", message)
+            Alamofire.request(url, method: .get , parameters: ["key" : key, "client" : client])
+            UserDefaults.standard.set(likes, forKey: "likes")
         }
     }
     
     func downvote() {
-        if let likes = UserDefaults.standard.array(forKey: "likes") as! [String]?, var dislikes = UserDefaults.standard.array(forKey: "dislikes") as! [String]? {
-            if !likes.contains(id) && !dislikes.contains(id) {
-                dislikes.append(id)
-                let url: String = "https://www.stepoutnyc.com/chitchat/dislike/" + id
-                print("DOWNVOTED: ", message)
-                Alamofire.request(url, method: .get , parameters: ["key" : key, "client" : client])
-            }
+        let likes = (UserDefaults.standard.array(forKey: "likes") ?? []) as! [String]
+        var dislikes = (UserDefaults.standard.array(forKey: "dislikes") ?? []) as! [String]
+        if !likes.contains(id) && !dislikes.contains(id) {
+            dislikes.append(id)
+            self.dislikes += 1
+            let url: String = "https://www.stepoutnyc.com/chitchat/dislike/" + id
+            print("DOWNVOTED: ", message)
+            Alamofire.request(url, method: .get , parameters: ["key" : key, "client" : client])
+            UserDefaults.standard.set(dislikes, forKey: "dislikes")
         }
     }
 }

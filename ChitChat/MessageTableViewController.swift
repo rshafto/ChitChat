@@ -13,12 +13,6 @@ class MessageTableViewController: UITableViewController {
     var messages: [Message] = []
     var message: Message!
     
-    @objc func checkBoxAction(_ sender: UIButton!) {
-        sender.alpha = 0.0
-        sender.isSelected = !sender.isSelected
-        sender.fadeIn(duration: 0.5)
-    }
-    
     @IBAction func AddMessage(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: "Send new message", message: "Enter your message", preferredStyle: .alert)
         var newMessage: String = ""
@@ -47,6 +41,14 @@ class MessageTableViewController: UITableViewController {
         self.present(alertController, animated: false, completion: nil)
     }
     
+    @IBAction func RefreshMessages(_ sender: UIBarButtonItem) {
+        getData()
+    }
+    
+    @IBAction func LoadMoreMessages(_ sender: UIButton) {
+        // get more data
+    }
+    
     func getData() {
         Alamofire.request("https://www.stepoutnyc.com/chitchat", method: .get, parameters: ["key" : key, "client" : client]).responseJSON { response in
             if let json = response.result.value {
@@ -69,7 +71,8 @@ class MessageTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
         let upvote = UIContextualAction(style: .destructive, title: "Like") { (action, view, handler) in
-            (self.tableView(tableView, cellForRowAt: indexPath) as! MessageCell).upvote()
+            self.messages[indexPath.row].upvote()
+            self.tableView.reloadRows(at: [indexPath], with: .left)
         }
         upvote.backgroundColor = .green
         let configuration = UISwipeActionsConfiguration(actions: [upvote])
@@ -80,6 +83,7 @@ class MessageTableViewController: UITableViewController {
     {
         let downvote = UIContextualAction(style: .destructive, title: "Dislike") { (action, view, handler) in
             self.messages[indexPath.row].downvote()
+            self.tableView.reloadRows(at: [indexPath], with: .right)
         }
         downvote.backgroundColor = .red
         let configuration = UISwipeActionsConfiguration(actions: [downvote])
@@ -104,15 +108,22 @@ class MessageTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        if section == 1 {
+            return 1
+        }
         return self.messages.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "loadMoreCell", for: indexPath) as! LoadMoreCell
+            return cell
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "messageCell", for: indexPath) as! MessageCell
         cell.setMessage(message: messages[indexPath.row])
 
