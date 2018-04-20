@@ -19,6 +19,7 @@ class MessageTableViewController: UITableViewController {
             newMessage = (alertController.textFields?[0].text) ?? "AHHHHHH"
             print("Sending message:", newMessage)
             sendMessage(message: newMessage, sendLocation: true)
+            self.getData()
         }
         
         alertController.addAction(OKAction)
@@ -33,12 +34,13 @@ class MessageTableViewController: UITableViewController {
             if let json = response.result.value {
                 let jsonDict = json as! NSDictionary
                 let jsonMessages = jsonDict["messages"] as! NSArray
+                self.messages.removeAll()
                 
                 for jsonMessage in jsonMessages {
                     let messageText = jsonMessage as! NSDictionary as! [String: Any]
                     self.message = Message(json: messageText)
                     self.messages.append(self.message)
-                    print (self.message.loc)
+                    print (self.message.id)
                 }
             }
             self.tableView.reloadData()
