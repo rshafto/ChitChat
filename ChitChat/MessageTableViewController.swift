@@ -12,19 +12,42 @@ import Alamofire
 class MessageTableViewController: UITableViewController {
     var messages: [Message] = []
     var message: Message!
+    
+    @objc func checkBoxAction(_ sender: UIButton!) {
+        sender.alpha = 0.0
+        if sender.backgroundImage(for: UIControlState()) == #imageLiteral(resourceName: "LocationOn") {
+            sender.setBackgroundImage(#imageLiteral(resourceName: "LocationOff"), for: UIControlState())
+        } else {
+            sender.setBackgroundImage(#imageLiteral(resourceName: "LocationOn"), for: UIControlState())
+        }
+        sender.fadeIn(duration: 0.5)
+    }
+    
     @IBAction func AddMessage(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: "Send new message", message: "Enter your message", preferredStyle: .alert)
         var newMessage: String = ""
+        let imageButton : UIButton = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
         let OKAction = UIAlertAction(title: "Enter", style: .default) { (action:UIAlertAction!) in
-            newMessage = (alertController.textFields?[0].text) ?? "AHHHHHH"
+            newMessage = (alertController.textFields?[0].text)!
             print("Sending message:", newMessage)
             sendMessage(message: newMessage, sendLocation: true)
+            //sendMessage(message: newMessage, sendLocation: imageButton.backgroundImage(for: .normal) == #imageLiteral(resourceName: "LocationOff"))
         }
+        
+        imageButton.setBackgroundImage(#imageLiteral(resourceName: "LocationOn"), for: UIControlState())
+        imageButton.addTarget(self, action: #selector(MessageTableViewController.checkBoxAction(_:)), for: .touchUpInside)
+        
+        
         
         alertController.addAction(OKAction)
         alertController.addTextField { (textField : UITextField!) -> Void in
             textField.placeholder = "message"
         }
+        
+        let verticalConstraint = NSLayoutConstraint(item: imageButton, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: view, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0)
+        
+        alertController.view.addSubview(imageButton)
+        alertController.view.addConstraints([verticalConstraint])
         self.present(alertController, animated: false, completion: nil)
     }
     
@@ -49,7 +72,7 @@ class MessageTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
     {
         let upvote = UIContextualAction(style: .destructive, title: "Like") { (action, view, handler) in
-            self.messages[indexPath.row].upvote()
+            (self.tableView(tableView, cellForRowAt: indexPath) as! MessageCell).upvote()
         }
         upvote.backgroundColor = .green
         let configuration = UISwipeActionsConfiguration(actions: [upvote])
