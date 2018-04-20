@@ -17,6 +17,7 @@
 		698D5C4A2084143D001024D9 /* MessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698D5C492084143D001024D9 /* MessageTableViewController.swift */; };
 		698D5C4E2084155C001024D9 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698D5C4D2084155C001024D9 /* MessageCell.swift */; };
 		698D5C5220843F60001024D9 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698D5C5120843F60001024D9 /* Message.swift */; };
+		76026FFC208A85F800A93589 /* LoadMoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76026FFB208A85F800A93589 /* LoadMoreCell.swift */; };
 		76EF14C4208913810074E065 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76EF14B7208913710074E065 /* Alamofire.framework */; };
 		76EF14C5208913810074E065 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 76EF14B7208913710074E065 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -107,6 +108,7 @@
 		698D5C492084143D001024D9 /* MessageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewController.swift; sourceTree = "<group>"; };
 		698D5C4D2084155C001024D9 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		698D5C5120843F60001024D9 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		76026FFB208A85F800A93589 /* LoadMoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreCell.swift; sourceTree = "<group>"; };
 		76EF14AB208913710074E065 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Alamofire.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -157,6 +159,7 @@
 				698D5C492084143D001024D9 /* MessageTableViewController.swift */,
 				698D5C1320840DEF001024D9 /* AppDelegate.swift */,
 				698D5C1720840DEF001024D9 /* Main.storyboard */,
+				76026FFB208A85F800A93589 /* LoadMoreCell.swift */,
 				698D5C1A20840DEF001024D9 /* Assets.xcassets */,
 				698D5C1C20840DEF001024D9 /* LaunchScreen.storyboard */,
 				698D5C1F20840DEF001024D9 /* Info.plist */,
@@ -318,6 +321,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				698D5C4E2084155C001024D9 /* MessageCell.swift in Sources */,
+				76026FFC208A85F800A93589 /* LoadMoreCell.swift in Sources */,
 				694C86C32087FF0B0058F27F /* ComposeMessageViewController.swift in Sources */,
 				694C86C5208805E60058F27F /* MessageInteractions.swift in Sources */,
 				698D5C5220843F60001024D9 /* Message.swift in Sources */,
