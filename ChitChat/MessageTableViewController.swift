@@ -12,13 +12,13 @@ import Alamofire
 class MessageTableViewController: UITableViewController {
     var messages: [Message] = []
     var message: Message!
+    var numMessages: Int = 20
     
     @objc func checkBoxAction(_ sender: UIButton) {
         sender.alpha = 0.0
         sender.isSelected = !sender.isSelected
         UIView.animate(withDuration: 0.5, animations: { sender.alpha = 1.0 })
     }
-    
     
     @IBAction func AddMessage(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: "Send new message", message: "Enter your message", preferredStyle: .alert)
@@ -53,11 +53,12 @@ class MessageTableViewController: UITableViewController {
     }
     
     @IBAction func LoadMoreMessages(_ sender: UIButton) {
-        // get more data
+        numMessages += 20
+        getData()
     }
     
     func getData() {
-        Alamofire.request("https://www.stepoutnyc.com/chitchat", method: .get, parameters: ["key" : key, "client" : client]).responseJSON { response in
+        Alamofire.request("https://www.stepoutnyc.com/chitchat", method: .get, parameters: ["key" : key, "client" : client, "limit" : numMessages]).responseJSON { response in
             if let json = response.result.value {
                 let jsonDict = json as! NSDictionary
                 let jsonMessages = jsonDict["messages"] as! NSArray
@@ -72,6 +73,8 @@ class MessageTableViewController: UITableViewController {
             }
             self.tableView.reloadData()
             print("reloaded data...")
+            
+            // needs to re-sort it by whatever it's being sorted by
         }
     }
     

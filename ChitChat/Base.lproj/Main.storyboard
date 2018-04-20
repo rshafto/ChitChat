@@ -9,7 +9,6 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -39,13 +38,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <pickerView key="tableHeaderView" contentMode="scaleToFill" id="GGH-EP-Nhx">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                        </pickerView>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="messageCell" rowHeight="140" id="WzR-kQ-YGY" customClass="MessageCell" customModule="ChitChat" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="72" width="375" height="140"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="140"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WzR-kQ-YGY" id="KRO-m8-WGG">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="139.5"/>
@@ -132,7 +127,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="loadMoreCell" rowHeight="50" id="AET-Em-GJ4" customClass="LoadMoreCell" customModule="ChitChat" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="212" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="168" width="375" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AET-Em-GJ4" id="UzY-7p-39Y">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
@@ -161,18 +156,16 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Messages" id="P1w-LW-7h2">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="compose" id="mxS-Mg-r4u">
-                                <connections>
-                                    <action selector="AddMessage:" destination="B1D-XF-Unu" id="inm-cw-k7X"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="refresh" id="hOf-tH-2o7">
-                                <connections>
-                                    <action selector="RefreshMessages:" destination="B1D-XF-Unu" id="6dK-Ug-k7W"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="hOf-tH-2o7">
+                            <connections>
+                                <action selector="RefreshMessages:" destination="B1D-XF-Unu" id="6dK-Ug-k7W"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="mxS-Mg-r4u">
+                            <connections>
+                                <action selector="AddMessage:" destination="B1D-XF-Unu" id="inm-cw-k7X"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HCi-yK-gSX" userLabel="First Responder" sceneMemberID="firstResponder"/>
