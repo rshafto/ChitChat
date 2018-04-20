@@ -128,5 +128,27 @@ class MessageTableViewController: UITableViewController {
         return cell
     }
 
-
+    @IBAction func SortTypeChanged(_ sender: UISegmentedControl) {
+        // sort the messages by the requested value
+        switch sender.selectedSegmentIndex {
+        case 0:
+            messages.sort { (a, b) -> Bool in
+                let dateFormatter = DateFormatter()
+                return dateFormatter.date(from: a.date)! < dateFormatter.date(from: b.date)!
+            }
+        case 1:
+            messages.sort { (a, b) -> Bool in
+                return a.likes < b.likes
+            }
+        case 2:
+            messages.sort { (a, b) -> Bool in
+                return a.dislikes < b.dislikes
+            }
+        default:
+            break
+        }
+        // Reload the table
+        tableView.reloadData()
+    }
+    
 }
