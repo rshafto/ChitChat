@@ -64,4 +64,14 @@ class MessageCell: UITableViewCell {
         downvoteDisplay.text = "👎" + String(message.dislikes)
         upvoteDisplay.text = "👍" + String(message.likes)
     }
+    
+    func upvote() {
+        message?.upvote()
+        upvoteDisplay.text = "👍" + String((message?.likes)! + 1)
+    }
+    
+    func downvote() {
+        message?.downvote()
+        downvoteDisplay.text = "👎" + String((message?.dislikes)! + 1)
+    }
 }

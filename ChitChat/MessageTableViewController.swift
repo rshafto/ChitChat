@@ -16,19 +16,26 @@ class MessageTableViewController: UITableViewController {
     @IBAction func AddMessage(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: "Send new message", message: "Enter your message", preferredStyle: .alert)
         var newMessage: String = ""
-        let CancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let imageButton : UIButton = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
         let OKAction = UIAlertAction(title: "Enter", style: .default) { (action:UIAlertAction!) in
-            newMessage = (alertController.textFields?[0].text) ?? "AHHHHHH"
+            newMessage = (alertController.textFields?[0].text)!
             print("Sending message:", newMessage)
-            sendMessage(message: newMessage, sendLocation: true)
+            sendMessage(message: newMessage, sendLocation: imageButton.isSelected)
             self.getData()
         }
         
-        alertController.addAction(CancelAction)
+        imageButton.setBackgroundImage(#imageLiteral(resourceName: "LocationOn"), for: .selected)
+        imageButton.setBackgroundImage(#imageLiteral(resourceName: "LocationOff"), for: .normal)
+        imageButton.addTarget(self, action: #selector(MessageTableViewController.checkBoxAction(_:)), for: .touchUpInside)
+        
         alertController.addAction(OKAction)
         alertController.addTextField { (textField : UITextField!) -> Void in
             textField.placeholder = "message"
         }
+        
+        alertController.view.addSubview(imageButton)
+//        let verticalConstraint = NSLayoutConstraint(item: imageButton, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: view, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0)
+//        alertController.view.addConstraints([verticalConstraint])
         self.present(alertController, animated: false, completion: nil)
     }
     
