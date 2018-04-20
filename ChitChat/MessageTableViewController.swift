@@ -143,15 +143,16 @@ class MessageTableViewController: UITableViewController {
         case 0:
             messages.sort { (a, b) -> Bool in
                 let dateFormatter = DateFormatter()
-                return dateFormatter.date(from: a.date)! < dateFormatter.date(from: b.date)!
+                dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss 'GMT'"
+                return dateFormatter.date(from: a.date)! > dateFormatter.date(from: b.date)!
             }
         case 1:
             messages.sort { (a, b) -> Bool in
-                return a.likes < b.likes
+                return a.likes > b.likes
             }
         case 2:
             messages.sort { (a, b) -> Bool in
-                return a.dislikes < b.dislikes
+                return a.dislikes > b.dislikes
             }
         default:
             break

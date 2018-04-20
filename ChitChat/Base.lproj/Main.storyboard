@@ -153,7 +153,7 @@
                                     <outlet property="upvoteDisplay" destination="Byz-tk-deA" id="lwC-jg-mOq"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="loadMoreCell" rowHeight="50" id="AET-Em-GJ4">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="loadMoreCell" rowHeight="50" id="AET-Em-GJ4" customClass="LoadMoreCell" customModule="ChitChat" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="212" width="375" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AET-Em-GJ4" id="UzY-7p-39Y">
