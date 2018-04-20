@@ -13,6 +13,13 @@ class MessageTableViewController: UITableViewController {
     var messages: [Message] = []
     var message: Message!
     
+    @objc func checkBoxAction(_ sender: UIButton) {
+        sender.alpha = 0.0
+        sender.isSelected = !sender.isSelected
+        UIView.animate(withDuration: 0.5, animations: { sender.alpha = 1.0 })
+    }
+    
+    
     @IBAction func AddMessage(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: "Send new message", message: "Enter your message", preferredStyle: .alert)
         var newMessage: String = ""
