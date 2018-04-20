@@ -46,8 +46,8 @@ class Message {
         id = (json["_id"] as? String)!
         if let coordinatesJSON = json["loc"] as? [Any] {
             if Double(String(describing: coordinatesJSON[0])) != nil {
-                let latitude: Double = Double(String(describing: coordinatesJSON[0]))!
-                let longitude: Double = Double(String(describing: coordinatesJSON[1]))!
+                let longitude: Double = Double(String(describing: coordinatesJSON[0]))!
+                let latitude: Double = Double(String(describing: coordinatesJSON[1]))!
                 loc = CLLocationCoordinate2D.init(latitude: latitude, longitude: longitude)
             }
         }
