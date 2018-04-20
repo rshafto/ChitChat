@@ -51,6 +51,7 @@ class MessageCell: UITableViewCell {
                 mapDisplay.isHidden = false
                 mapDisplay.setRegion(coordinateRegion, animated: true)
                 mapDisplay.isZoomEnabled = true
+                mapDisplay.isRotateEnabled = false
                 let annotation: MKAnnotation = PointerCoordinate(location: location)
                 mapDisplay.addAnnotation(annotation)
             } else {

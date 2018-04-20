@@ -9,10 +9,17 @@
 import UIKit
 import Alamofire
 
+enum SortType {
+    case time
+    case likes
+    case dislikes
+}
+
 class MessageTableViewController: UITableViewController {
     var messages: [Message] = []
     var message: Message!
     var numMessages: Int = 20
+    var sortType: SortType = .time
     
     @objc func checkBoxAction(_ sender: UIButton) {
         sender.alpha = 0.0
@@ -71,6 +78,7 @@ class MessageTableViewController: UITableViewController {
                     print (self.message.id)
                 }
             }
+            self.sort(by: self.sortType)
             self.tableView.reloadData()
             print("reloaded data...")
             
@@ -141,27 +149,27 @@ class MessageTableViewController: UITableViewController {
     }
 
     @IBAction func SortTypeChanged(_ sender: UISegmentedControl) {
-        // sort the messages by the requested value
-        switch sender.selectedSegmentIndex {
-        case 0:
+        sortType = [.time, .likes, .dislikes][sender.selectedSegmentIndex]
+        sort(by: sortType)
+        tableView.reloadData()
+    }
+    
+    func sort(by method: SortType) {
+        switch method {
+        case .time:
             messages.sort { (a, b) -> Bool in
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss 'GMT'"
                 return dateFormatter.date(from: a.date)! > dateFormatter.date(from: b.date)!
             }
-        case 1:
+        case .likes:
             messages.sort { (a, b) -> Bool in
                 return a.likes > b.likes
             }
-        case 2:
+        case .dislikes:
             messages.sort { (a, b) -> Bool in
                 return a.dislikes > b.dislikes
             }
-        default:
-            break
         }
-        // Reload the table
-        tableView.reloadData()
     }
-    
 }
