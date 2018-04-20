@@ -45,7 +45,7 @@ class MessageCell: UITableViewCell {
         }
         
         if let location = message.loc {
-            let regionRadius: CLLocationDistance = 0.01
+            let regionRadius: CLLocationDistance = 1000
             if CLLocationCoordinate2DIsValid(location) {
                 let coordinateRegion = MKCoordinateRegionMakeWithDistance(location, regionRadius, regionRadius)
                 mapDisplay.isHidden = false
