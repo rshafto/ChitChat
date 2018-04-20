@@ -15,6 +15,7 @@ class MessageTableViewController: UITableViewController {
     @IBAction func AddMessage(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: "Send new message", message: "Enter your message", preferredStyle: .alert)
         var newMessage: String = ""
+        let CancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let OKAction = UIAlertAction(title: "Enter", style: .default) { (action:UIAlertAction!) in
             newMessage = (alertController.textFields?[0].text) ?? "AHHHHHH"
             print("Sending message:", newMessage)
@@ -22,6 +23,7 @@ class MessageTableViewController: UITableViewController {
             self.getData()
         }
         
+        alertController.addAction(CancelAction)
         alertController.addAction(OKAction)
         alertController.addTextField { (textField : UITextField!) -> Void in
             textField.placeholder = "message"
