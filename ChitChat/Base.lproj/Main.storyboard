@@ -79,8 +79,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Login &gt;"/>
                                 <connections>
-                                    <action selector="loginButtonPressed:" destination="GpM-bM-5Os" eventType="touchUpInside" id="bI6-xW-oJr"/>
-                                    <segue destination="B1D-XF-Unu" kind="show" identifier="loginSegue" id="Wpy-dw-29Y"/>
+                                    <action selector="loginButtonPressed:" destination="GpM-bM-5Os" eventType="touchUpInside" id="owj-jb-6h6"/>
+                                    <segue destination="B1D-XF-Unu" kind="show" identifier="loginSegue" id="tQb-qt-APD"/>
                                 </connections>
                             </button>
                         </subviews>

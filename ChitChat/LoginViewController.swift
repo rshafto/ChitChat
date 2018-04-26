@@ -32,30 +32,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if identifier == "loginSegue" {
-            if let client = emailField.text, let key = keyField.text {
-                Alamofire.request("https://www.stepoutnyc.com/chitchat", method: .get, parameters: ["key" : key, "client": client, "limit": 1]).responseJSON { response in
-                    if let json = response.result.value as? NSDictionary {
-                        self.validated = ((json["code"] as? String) == nil)
-                    }
-                }
-                if validated {
-                    UserDefaults.standard.set(emailField.text, forKey: "lastUsedEmail")
-                    UserDefaults.standard.set(keyField.text, forKey: "lastUsedKey")
-                } else {
-                    let shake = CABasicAnimation(keyPath: "position")
-                    shake.duration = 0.1
-                    shake.repeatCount = 3
-                    shake.autoreverses = true
-                    shake.fromValue = NSValue(cgPoint: CGPoint(x: loginButton.center.x, y: loginButton.center.y))
-                    shake.toValue = NSValue(cgPoint: CGPoint(x: loginButton.center.x - 10, y: loginButton.center.y))
-                    loginButton.layer.add(shake, forKey: "position")
-                }
-                return validated
-            }
-        }
-        return false
+        return validated
     }
+    
 // e0ba6f5d-9f79-4bf3-a7f8-298228850975
     /*
     // MARK: - Navigation
@@ -81,7 +60,26 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func loginButtonPressed(_ sender: UIButton) {
         // To authenticate, send a test request
-        
+        if let client = emailField.text, let key = keyField.text {
+            Alamofire.request("https://www.stepoutnyc.com/chitchat", method: .get, parameters: ["key" : key, "client": client, "limit": 1]).responseJSON { response in
+                if let json = response.result.value as? NSDictionary {
+                    if ((json["code"] as? String) == nil) {
+                        UserDefaults.standard.set(self.emailField.text, forKey: "lastUsedEmail")
+                        UserDefaults.standard.set(self.keyField.text, forKey: "lastUsedKey")
+                        self.validated = true
+                        self.performSegue(withIdentifier: "loginSegue", sender: self)
+                    } else {
+                        let shake = CABasicAnimation(keyPath: "position")
+                        shake.duration = 0.1
+                        shake.repeatCount = 3
+                        shake.autoreverses = true
+                        shake.fromValue = NSValue(cgPoint: CGPoint(x: self.loginButton.center.x, y: self.loginButton.center.y))
+                        shake.toValue = NSValue(cgPoint: CGPoint(x: self.loginButton.center.x - 10, y: self.loginButton.center.y))
+                        self.loginButton.layer.add(shake, forKey: "position")
+                    }
+                }
+            }
+        }
     }
     
 }
