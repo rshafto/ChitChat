@@ -43,7 +43,7 @@ func sendMessage(message: String, sendLocation: Bool) {
     //url += "&lat="+lat+"&lon="+lon
     let url: String = "https://www.stepoutnyc.com/chitchat"
     
-    Alamofire.request(url, method: .post , parameters: ["key" : key, "client" : client, "message" : message, "lat" : lat, "lon" : lon])
+    Alamofire.request(url, method: .post , parameters: ["key" : UserDefaults.standard.string(forKey: "lastUsedKey")!, "client" : UserDefaults.standard.string(forKey: "lastUsedEmail")!, "message" : message, "lat" : lat, "lon" : lon])
 }
 
 

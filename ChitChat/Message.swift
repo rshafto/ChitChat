@@ -11,8 +11,8 @@ import MapKit
 import CoreLocation
 import Alamofire
 
-let key = "735e6cff-5205-49b7-be80-7ec57c083aac"
-let client = "robin.shafto@mymail.champlain.edu"
+//let key = "735e6cff-5205-49b7-be80-7ec57c083aac"
+//let client = "robin.shafto@mymail.champlain.edu"
 
 extension UIImage {
     convenience init?(url: URL?) {
@@ -78,7 +78,7 @@ class Message {
             self.likes += 1
             let url: String = "https://www.stepoutnyc.com/chitchat/like/" + id
             print("UPVOTED: ", message)
-            Alamofire.request(url, method: .get , parameters: ["key" : key, "client" : client])
+            Alamofire.request(url, method: .get , parameters: ["key" : UserDefaults.standard.string(forKey: "lastUsedKey")!, "client" : UserDefaults.standard.string(forKey: "lastUsedEmail")!])
             UserDefaults.standard.set(likes, forKey: "likes")
         }
     }
@@ -91,7 +91,7 @@ class Message {
             self.dislikes += 1
             let url: String = "https://www.stepoutnyc.com/chitchat/dislike/" + id
             print("DOWNVOTED: ", message)
-            Alamofire.request(url, method: .get , parameters: ["key" : key, "client" : client])
+            Alamofire.request(url, method: .get , parameters: ["key" : UserDefaults.standard.string(forKey: "lastUsedKey")!, "client" : UserDefaults.standard.string(forKey: "lastUsedEmail")!])
             UserDefaults.standard.set(dislikes, forKey: "dislikes")
         }
     }
